@@ -6,24 +6,41 @@ authors = [
     {name = "Jonas Limpert",email = "33454605+JonaLimp@users.noreply.github.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.10"
-dependencies = [
-    "pandas (>=2.2.3,<3.0.0)",
-    "scikit-learn (>=1.6.1,<2.0.0)",
-    "requests (>=2.32.3,<3.0.0)",
-    "flask (>=3.1.0,<4.0.0)",
-    "black (>=25.1.0,<26.0.0)",
-    "flake8 (>=7.2.0,<8.0.0)",
-    "mypy (>=1.15.0,<2.0.0)",
-    "isort (>=6.0.1,<7.0.0)"
-]
+python = ">=3.10,<4.0"
 
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+pandas = ">=2.2.3,<3.0.0"
+scikit-learn = ">=1.6.1,<2.0.0"
+requests = ">=2.32.3,<3.0.0"
+flask = ">=3.1.0,<4.0.0"
+
+[tool.poetry.group.dev.dependencies]
+black = ">=25.1.0,<26.0.0"
+flake8 = ">=7.2.0,<8.0.0"
+mypy = ">=1.15.0,<2.0.0"
+isort = ">=6.0.1,<7.0.0"
+commitizen = "^4.4.1"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.poetry.group.dev.dependencies]
-pre-commit = "^4.2.0"
-pytest = "^8.3.5"
+[tool.black]
+line-length = 88
+target-version = ["py310"]
 
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.mypy]
+python_version = 3.10
+ignore_missing_imports = true
+strict = true
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.1.0"          # sync with your package version
+tag_format = "v$version"   # version tag format
+update_changelog_on_bump = true
