@@ -7,6 +7,10 @@ authors = [
 ]
 readme = "README.md"
 python = ">=3.10,<4.0"
+packages = [
+  { include = "envirosentinel" }
+]
+
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
