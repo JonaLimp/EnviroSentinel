@@ -20,6 +20,8 @@ black = ">=25.1.0,<26.0.0"
 flake8 = ">=7.2.0,<8.0.0"
 mypy = ">=1.15.0,<2.0.0"
 isort = ">=6.0.1,<7.0.0"
+types-requests = "^2.32.0.20250328"
+pyyaml = "^6.0.2"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
