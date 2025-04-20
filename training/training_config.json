@@ -1,0 +1,39 @@
+{
+    "boxes": {
+        "Bad Sauerbrunn, Augasse": {
+            "box_id": "5e60f87357703e001be9fbaa",
+            "sensors": {}
+        },
+        "Stadtteilbüro Siemensstadt": {
+            "box_id": "6595489a649ae60007d0fc04",
+            "sensors": {}
+        },
+        "PANGAEAs SenseBox": {
+            "box_id": "65b93a99e9153000078d1370",
+            "sensors": {}
+        },
+        "Station Kaiser": {
+            "box_id": "6398c664a7390d001b5e0742",
+            "sensors": {}
+        },
+        "Lake Barmen": {
+            "box_id": "6571bd3a0db98500075408ae",
+            "sensors": {}
+        }
+    },
+    "sensor_types": [
+        "Temperatur",
+        "rel. Luftfeuchte",
+        "Beleuchtungsstärke",
+        "UV-Intensität",
+        "PM10",
+        "PM2.5",
+        "Lautstärke"
+    ],
+    "preprocessing": {
+        "fetch_interval": 2,
+        "start_date": "now",
+        "resample": true,
+        "resample_interval": "10min"
+    }
+}
