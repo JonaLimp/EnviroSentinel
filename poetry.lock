@@ -2603,6 +2603,25 @@ files = [
 six = ">=1.5"
 
 [[package]]
+<<<<<<< HEAD
+=======
+name = "python-dotenv"
+version = "1.1.0"
+description = "Read key-value pairs from a .env file and set them as environment variables"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+markers = "python_version <= \"3.11\" or python_version >= \"3.12\""
+files = [
+    {file = "python_dotenv-1.1.0-py3-none-any.whl", hash = "sha256:d7c01d9e2293916c18baf562d95698754b0dbbb5e74d457c45d4f6561fb9d55d"},
+    {file = "python_dotenv-1.1.0.tar.gz", hash = "sha256:41f90bc6f5f177fb41f53e87666db362025010eb28f60a01c9143bfa33a2b2d5"},
+]
+
+[package.extras]
+cli = ["click (>=5.0)"]
+
+[[package]]
+>>>>>>> 2597822 (Minor changes to CI)
 name = "python-json-logger"
 version = "3.3.0"
 description = "JSON Log Formatter for the Python Logging Package"
@@ -3606,4 +3625,8 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<4.0"
+<<<<<<< HEAD
 content-hash = "bb3332e2b875c098f97147d03ddb59584ba8d5a91eb99753040e6510aee881e8"
+=======
+content-hash = "10c507667825ec8baa24a8b66be4fcefbcf60b65f13eca3ed1b7eb3097544ca5"
+>>>>>>> 2597822 (Minor changes to CI)
