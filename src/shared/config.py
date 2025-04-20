@@ -16,6 +16,7 @@ load_dotenv(
 
 class Config:
     # Root directory of the project
+    DEBUG = True
     PROJECT_ROOT = Path(__file__).parent.parent.parent
     MODEL_PATH = PROJECT_ROOT / Path(os.getenv("MODEL_PATH", "model/default_model.pkl"))
     MODEL_NAME = MODEL_PATH.stem
@@ -44,13 +45,11 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
     ENV = "development"
-    DEBUG = True
     TESTING = False
 
 
 class TestingConfig(Config):
     ENV = "testing"
-    DEBUG = True
     TESTING = True
     FLASK_ENV = "testing"
 
