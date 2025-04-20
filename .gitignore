@@ -1,2 +1,11 @@
-data/*
+.env
+.env.*
+!.env.example
+
+*.pkl
+*.joblib
+
+.venv/
+
+training/data/*
 model/*
