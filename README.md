@@ -58,7 +58,6 @@ Loads a trained ML model, accepts POSTs to `/predict`, and returns anomaly detec
 | `model_service.py` | `Predictor` | Load ML model and perform predictions         |
 | `routes.py`        | Flask Route| Expose `/predict` API                         |
 | `config.py`        | Config     | Holds model path, thresholds, etc.            |
-| `logger.py`        | Logger     | Centralized logging utility                   |
 
 ---
 
