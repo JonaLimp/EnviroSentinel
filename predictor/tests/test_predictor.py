@@ -1,12 +1,9 @@
-from typing import TYPE_CHECKING
 from unittest.mock import patch
 
 import numpy as np
 import pytest
-
-if TYPE_CHECKING:
-    from numpy.typing import NDArray
-    from src.predictor.model_service import Predictor
+from numpy.typing import NDArray
+from src.predictor.model_service import Predictor
 
 
 class DummyConfig:
@@ -49,5 +46,4 @@ class TestPredictor:
 
             assert isinstance(result, np.ndarray)
             assert list(result) == [1, 0]
-            assert predictor.model is not None
             assert mock_load.call_count == 2

@@ -1,13 +1,11 @@
-from typing import TYPE_CHECKING, Generator
+from typing import Generator
 from unittest.mock import MagicMock, patch
 
 import pytest
-from flask import json
+from flask import Flask, json
+from flask.testing import FlaskClient
 from src.app import create_app
 from src.shared.config import load_config
-
-if TYPE_CHECKING:
-    from flask.testing import Flask, FlaskClient
 
 
 @pytest.fixture

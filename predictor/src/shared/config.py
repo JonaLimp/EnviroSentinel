@@ -3,21 +3,21 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-# Load environment variables from base .env file
-load_dotenv(dotenv_path=".env", override=True)
+base_env_path = Path(".env")
+if base_env_path.exists():
+    load_dotenv(dotenv_path=base_env_path, override=False)
 
-# Load environment variables from specific .env file
+# Determine environment (default: development)
 env = os.getenv("ENV", "development")
-load_dotenv(
-    dotenv_path=f".env.{env}",
-    override=True,
-)
+env_file_path = Path(f".env.{env}")
+if env_file_path.exists():
+    load_dotenv(dotenv_path=env_file_path, override=True)
 
 
 class Config:
     # Root directory of the project
     DEBUG = True
-    PROJECT_ROOT = Path(__file__).parent.parent.parent
+    PROJECT_ROOT = Path(__file__).parent.parent.parent.parent
     MODEL_PATH = PROJECT_ROOT / Path(os.getenv("MODEL_PATH", "model/default_model.pkl"))
     MODEL_NAME = MODEL_PATH.stem
     SCALER_PATH = PROJECT_ROOT / Path(
