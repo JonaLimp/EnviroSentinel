@@ -10,11 +10,8 @@ python = ">=3.10,<4.0"
 packages = [
   { include = "envirosentinel" }
 ]
-<<<<<<< HEAD
-=======
 [tool.poetry.scripts]
 envirosentinel = "run:app"
->>>>>>> 2597822 (Minor changes to CI)
 
 
 [tool.poetry.dependencies]
