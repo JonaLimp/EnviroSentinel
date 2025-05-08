@@ -55,3 +55,5 @@ ignore_missing_imports = true
 strict = false
 mypy_path = "src"
 
+[pytest]
+python_paths = ["predictor/src", "data_ingest/src", "shared"]
