@@ -1,11 +1,12 @@
 from typing import TYPE_CHECKING
 
 from flask import Flask
-from src.predictor import routes  # noqa: F401
-from src.predictor.blueprint import home_bp, predictor_bp
+
+from predictor.src import routes  # noqa: F401
+from predictor.src.blueprint import home_bp, predictor_bp
 
 if TYPE_CHECKING:
-    from src.shared.config import Config
+    from shared.config import Config
 
 
 def create_app(config: "Config") -> Flask:
@@ -15,7 +16,6 @@ def create_app(config: "Config") -> Flask:
     app = Flask(__name__)
     app.config.from_object(config)
 
-    # Mounts the blueprint to the app
     app.register_blueprint(home_bp)
     app.register_blueprint(predictor_bp, url_prefix="/predictor")
 

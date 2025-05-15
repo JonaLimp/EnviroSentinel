@@ -3,7 +3,8 @@ from unittest.mock import patch
 import numpy as np
 import pytest
 from numpy.typing import NDArray
-from src.predictor.model_service import Predictor
+
+from predictor.src.model_service import Predictor
 
 
 class DummyConfig:
@@ -36,7 +37,7 @@ class DummyScaler:
 
 class TestPredictor:
     def test_predictor_predict(self, mock_config, dummy_input):
-        with patch("src.predictor.model_service.joblib.load") as mock_load:
+        with patch("predictor.src.model_service.joblib.load") as mock_load:
             # joblib.load gets called twice: once for model, once for scaler
             mock_load.side_effect = [DummyModel(), DummyScaler()]
 

@@ -4,13 +4,14 @@ from unittest.mock import MagicMock, patch
 import pytest
 from flask import Flask, json
 from flask.testing import FlaskClient
-from src.app import create_app
-from src.shared.config import load_config
+
+from predictor.config import load_predictor_config
+from predictor.src.app import create_app
 
 
 @pytest.fixture
 def app() -> Generator["Flask", None, None]:
-    config = load_config("testing")
+    config = load_predictor_config()
     app = create_app(config)
     app.testing = True
     yield app
@@ -39,7 +40,7 @@ def test_predict_valid_data(client: "FlaskClient") -> None:
     dummy_result = MagicMock()
     dummy_result.tolist.return_value = [1]
 
-    with patch("src.predictor.routes.predictor.predict", return_value=dummy_result):
+    with patch("predictor.src.routes.predictor.predict", return_value=dummy_result):
         response = client.post(
             "/predictor/predict",
             data=json.dumps(sample_data),
