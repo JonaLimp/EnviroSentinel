@@ -1,40 +1,16 @@
 {
     "boxes": {
-        "Stadtteilbüro Siemensstadt": {
-            "box_id": "6595489a649ae60007d0fc04",
-            "sensors": {}
-        },
-        "PANGAEAs SenseBox": {
-            "box_id": "65b93a99e9153000078d1370",
-            "sensors": {}
-        },
-        "Station Kaiser": {
-            "box_id": "6398c664a7390d001b5e0742",
-            "sensors": {}
-        },
-        "home Klinga": {
-            "box_id": "6436f9475a16e300083963a8"
-        },
-        "Lake Barmen": {
-            "box_id": "6571bd3a0db98500075408ae",
-            "sensors": {}
-        },
-        "SCOE": {
-            "box_id": "6230b66fbe6329001ce0e0de",
-            "sensors": {}
-        },
-        "Schnus Sense Box": {
-            "box_id": "6395fa95a7390d001b015812",
-            "sensors": {}
-        }
+        "Stadtteilbüro Siemensstadt": "6595489a649ae60007d0fc04",
+        "PANGAEAs SenseBox": "65b93a99e9153000078d1370",
+        "Station Kaiser": "6398c664a7390d001b5e0742",
+        "home Klinga": "6436f9475a16e300083963a8",
+        "Lake Barmen": "6571bd3a0db98500075408ae",
+        "SCOE": "6230b66fbe6329001ce0e0de",
+        "Schnus Sense Box": "6395fa95a7390d001b015812"
     },
-    "sensor_types": [
+        "sensor_types": [
         "Temperatur",
         "rel. Luftfeuchte",
-        "Beleuchtungsstärke",
-        "UV-Intensität",
-        "PM10",
-        "PM2.5",
         "Lautstärke"
     ],
     "preprocessing": {
