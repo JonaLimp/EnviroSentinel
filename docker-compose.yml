@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  predictor:
+    build:
+      context: .
+      dockerfile: predictor/Dockerfile
+    container_name: predictor_service
+    ports:
+      - "5002:5000"  # host:container
+    environment:
+      - ENV=development
+    volumes:
+      - ./model:/app/model
+    restart: unless-stopped
+
+  data_ingest:
+    build:
+      context: .
+      dockerfile: data_ingest/Dockerfile
+    container_name: data_ingest_service
+    ports:
+      - "5001:5000"
+    environment:
+      - ENV=development
+      - PREDICTOR_URL=http://predictor:5000  
+    volumes:
+      - ./sensor_config.json:/app/sensor_config.json
+    depends_on:
+      - predictor
+    restart: unless-stopped
