@@ -53,6 +53,3 @@ strict = false
 mypy_path = ["data_ingest/src, predictor/src"]
 explicit_package_bases = true
 namespace_packages = true
-
-[pytest]
-python_paths = ["predictor/src", "data_ingest/src", "shared"]
