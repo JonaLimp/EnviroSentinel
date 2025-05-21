@@ -6,7 +6,7 @@ from data_ingest.src import routes as _  # noqa: F401
 from data_ingest.src.blueprint import home_bp, ingestor_bp
 
 if TYPE_CHECKING:
-    from shared.config import Config
+    from predictor.config import Config
 
 
 def create_app(config: "Config") -> Flask:

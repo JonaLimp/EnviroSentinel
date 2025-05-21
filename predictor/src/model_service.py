@@ -2,14 +2,14 @@ from typing import TYPE_CHECKING
 
 import joblib
 
-from shared.logger import get_logger
+from predictor.logger import get_logger
 
 if TYPE_CHECKING:
     from numpy import ndarray
     from sklearn.ensemble import IsolationForest
     from sklearn.preprocessing import StandardScaler
 
-    from shared.config import Config
+    from predictor.config import Config
 
 
 class Predictor:

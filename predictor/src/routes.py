@@ -2,11 +2,11 @@ from typing import Literal
 
 from flask import Response, jsonify, request
 
-from predictor.config import load_predictor_config
+from predictor.config import load_config
 from predictor.src.blueprint import predictor_bp
 from predictor.src.model_service import Predictor
 
-predictor = Predictor(load_predictor_config())
+predictor = Predictor(load_config())
 
 
 @predictor_bp.route("/predict", methods=["POST"])

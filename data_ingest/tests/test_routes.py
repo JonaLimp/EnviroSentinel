@@ -3,13 +3,13 @@ from unittest.mock import patch
 import pytest
 from flask import current_app
 
-from data_ingest.config import load_data_ingest_config
+from data_ingest.config import load_config
 from data_ingest.src.app import create_app
 
 
 @pytest.fixture
 def client():
-    config = load_data_ingest_config()
+    config = load_config()
     app = create_app(config)
     app.config["TESTING"] = True
     with app.test_client() as client:

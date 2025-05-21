@@ -1,22 +1,25 @@
+from pathlib import Path
 from unittest.mock import patch
 
 import numpy as np
 import pytest
 from numpy.typing import NDArray
 
+from predictor.config import Config
 from predictor.src.model_service import Predictor
 
 
-class DummyConfig:
-    MODEL_PATH = "model/mock_model.pkl"
-    SCALER_PATH = "model/mock_scaler.pkl"
-    MODEL_NAME = "mock_model"
-    SCALER_NAME = "mock_scaler"
+class TestConfig(Config):
+    DEBUG = True
+    TESTING = True
+    ANOMALY_THRESHOLD = 0.9
+    MODEL_PATH = Path("/tmp/test_model.pkl")
+    SCALER_PATH = Path("/tmp/test_scaler.pkl")
 
 
 @pytest.fixture
-def mock_config() -> DummyConfig:
-    return DummyConfig()
+def mock_config() -> TestConfig:
+    return TestConfig()
 
 
 @pytest.fixture

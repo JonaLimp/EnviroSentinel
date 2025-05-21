@@ -1,18 +1,15 @@
-[project]
+[tool.poetry]
 name = "envirosentinel"
 version = "0.1.0"
 description = "IoT-based anomaly detection using environmental sensor data"
-authors = [
-    {name = "Jonas Limpert",email = "33454605+JonaLimp@users.noreply.github.com"}
-]
+authors = ["Jonas Limpert <33454605+JonaLimp@users.noreply.github.com>"]
 readme = "README.md"
-python = ">=3.10,<4.0"
 packages = [
   { include = "envirosentinel" }
 ]
+
 [tool.poetry.scripts]
 envirosentinel = "run:app"
-
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"

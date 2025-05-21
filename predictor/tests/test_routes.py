@@ -5,13 +5,13 @@ import pytest
 from flask import Flask, json
 from flask.testing import FlaskClient
 
-from predictor.config import load_predictor_config
+from predictor.config import load_config
 from predictor.src.app import create_app
 
 
 @pytest.fixture
 def app() -> Generator["Flask", None, None]:
-    config = load_predictor_config()
+    config = load_config()
     app = create_app(config)
     app.testing = True
     yield app
