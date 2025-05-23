@@ -1,7 +1,6 @@
 from unittest.mock import patch
 
 import pytest
-from flask import current_app
 
 from data_ingest.config import load_config
 from data_ingest.src.app import create_app
@@ -33,12 +32,13 @@ def test_ingest_success(mock_fetch, mock_send, client):
 
     data = response.get_json()
     assert isinstance(data, list)
-    assert len(data) == len(current_app.config["CONFIG"].BOX_IDS)
+    expected_len = len(client.application.config["CONFIG"].BOX_IDS)
+    assert len(data) == expected_len
 
     for entry in data:
         assert "box_id" in entry
         assert "box_name" in entry
-        assert "input" in entry
+        assert "data" in entry
         assert "prediction" in entry
 
 
@@ -61,25 +61,26 @@ def test_ingest_with_prediction_error(mock_fetch, mock_send, client):
     assert any("error" in entry for entry in data)
 
 
-@patch("data_ingest.src.routes.PredictorSender.send")
-@patch("data_ingest.src.routes.OpenSenseFetcher.fetch_latest")
-@patch("data_ingest.src.routes.OpenSenseFetcher.__init__")
-def test_ingest_logic_success(mock_init, mock_fetch, mock_send, client):
-    from data_ingest.src.routes import ingest
-
-    mock_init.return_value = None
-    mock_fetch.return_value = {
-        "Temperature": {
-            "value": 20.1,
-            "unit": "°C",
-            "timestamp": "2024-01-01T00:00:00Z",
-        }
-    }
-    mock_send.return_value = {"anomaly": False}
-
-    with client.application.app_context():
-        response = ingest()
-        result = response.get_json()
-
-    assert isinstance(result, list)
-    assert all("input" in item and "prediction" in item for item in result)
+def test_ingest_route_success(client):
+    with (
+        patch(
+            "data_ingest.src.routes.PredictorSender.send",
+            return_value={"anomaly": False},
+        ),
+        patch(
+            "data_ingest.src.routes.OpenSenseFetcher.fetch_latest",
+            return_value={
+                "Temperature": {
+                    "value": 22.1,
+                    "unit": "°C",
+                    "timestamp": "2024-01-01T00:00:00Z",
+                }
+            },
+        ),
+        patch("data_ingest.src.routes.OpenSenseFetcher.__init__", return_value=None),
+    ):
+        response = client.get("/ingestor/ingest")
+        assert response.status_code == 200
+        data = response.get_json()
+        assert isinstance(data, list)
+        assert all("data" in item and "prediction" in item for item in data)

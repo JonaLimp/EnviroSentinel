@@ -10,8 +10,6 @@ class OpenSenseFetcher:
 
     def fetch_latest(self, box_id: str) -> Dict[str, Any]:
         url = f"{self._url}/{box_id}"
-        print(f"url: {url}")
-        print(f"allowed_sensor_types: {self._allowed_sensor_types}")
         try:
             results = self._fetch_data(
                 url, allowed_sensor_types=self._allowed_sensor_types

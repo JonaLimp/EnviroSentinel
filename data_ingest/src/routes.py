@@ -12,19 +12,23 @@ def ingest():
     sender = PredictorSender(config.PREDICTOR_URL)
     results = []
 
-    for name, box_id in box_ids.items():
+    fetcher = OpenSenseFetcher(config.BASE_URL, config.SENSOR_TYPES)
+
+    for box_name, box_id in box_ids.items():
         try:
-            fetcher = OpenSenseFetcher(config.BASE_URL, config.SENSOR_TYPES)
             data = fetcher.fetch_latest(box_id=box_id)
-            prediction = sender.send(data)
-            results.append(
-                {
-                    "box_name": name,
-                    "box_id": box_id,
-                    "input": data,
-                    "prediction": prediction,
-                }
-            )
+            current_app.logger.debug(f"Fetched data for {box_name}: {data}")
+
+            box_data = {
+                "box_name": box_name,
+                "box_id": box_id,
+                "data": data,
+            }
+            print(f"Box data: {box_data}")
+            prediction = sender.send(box_data)
+
+            results.append({**box_data, "prediction": prediction})
+
         except Exception as e:
             results.append({"box_id": box_id, "error": str(e)})
 

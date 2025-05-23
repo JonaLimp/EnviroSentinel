@@ -3,7 +3,7 @@ import requests
 
 class PredictorSender:
     def __init__(self, predictor_url: str):
-        self.url = predictor_url
+        self.url = f"{predictor_url}/predictor/predict"
 
     def send(self, data: dict) -> dict:
         resp = requests.post(self.url, json=data)
