@@ -1,11 +1,30 @@
+# Env
 .env
 .env.*
 !.env.example
 
+# Models and Encoders
 *.pkl
 *.joblib
+model/*.pkl
+model/*.joblib
+!model/README.md
 
+# Virtual Envs
 .venv/
 
+# Training Data
 training/data/*
-model/*
+!training/data/README.md
+!training/data/example.csv
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Jupyter
+*.ipynb_checkpoints/
+
+# OS Files
+.DS_Store
+training/data/processed_data/
