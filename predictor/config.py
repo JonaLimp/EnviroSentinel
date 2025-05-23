@@ -36,6 +36,12 @@ class Config:
     # Model
     MODEL_PATH = PROJECT_ROOT / os.getenv("MODEL_PATH", "model/predictor_model.pkl")
     SCALER_PATH = PROJECT_ROOT / os.getenv("SCALER_PATH", "model/scaler.pkl")
+    SOUND_ENCODER_PATH = PROJECT_ROOT / os.getenv(
+        "SOUND_ENCODER_PATH", "model/sound_encoder.pkl"
+    )
+    STATION_ENCODER_PATH = PROJECT_ROOT / os.getenv(
+        "STATION_ENCODER_PATH", "model/station_encoder.pkl"
+    )
     ANOMALY_THRESHOLD = float(os.getenv("ANOMALY_THRESHOLD", "0.7"))
     MODEL_NAME = MODEL_PATH.stem
     SCALER_NAME = SCALER_PATH.stem

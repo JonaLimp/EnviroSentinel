@@ -5,19 +5,32 @@ from flask import Response, jsonify, request
 from predictor.config import load_config
 from predictor.src.blueprint import predictor_bp
 from predictor.src.model_service import Predictor
+from predictor.src.preprocessor import Preprocessor
 
-predictor = Predictor(load_config())
+config = load_config()
+
+preprocessor = Preprocessor(
+    False, config.SOUND_ENCODER_PATH, config.STATION_ENCODER_PATH, history_size=10
+)
+predictor = Predictor(config)
 
 
 @predictor_bp.route("/predict", methods=["POST"])
 def predict_endpoint() -> tuple[Response, Literal[400]] | Response:
-    data = request.get_json()
-    if not data or "features" not in data:
-        return jsonify({"error": "Invalid input data"}), 400
+    payload = request.get_json()
+    if not payload or "data" not in payload or "box_name" not in payload:
+        return jsonify({"error": "Missing 'data' or 'box_name' in request"}), 400
 
-    features = data.get("features", [])
-    result = predictor.predict(features)
-    return jsonify({"predictions": result.tolist()})
+    box_name = payload["box_name"]
+    sensor_data = payload["data"]
+
+    try:
+        features = preprocessor.transform_from_sensor_data(sensor_data, box_name)
+
+        result = predictor.predict([features])
+        return jsonify({"predictions": result.tolist()})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
 
 @predictor_bp.route("/health", methods=["GET"])

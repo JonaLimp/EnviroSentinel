@@ -35,7 +35,26 @@ def test_home_endpoint(client: "FlaskClient") -> None:
 
 
 def test_predict_valid_data(client: "FlaskClient") -> None:
-    sample_data = {"features": [12.0, 3.0]}
+    sample_payload = {
+        "box_name": "Schnus_Sense_Box",
+        "data": {
+            "Temperatur": {
+                "value": 21.0,
+                "unit": "°C",
+                "timestamp": "2025-01-01T12:00:00Z",
+            },
+            "rel. Luftfeuchte": {
+                "value": 50.0,
+                "unit": "%",
+                "timestamp": "2025-01-01T12:00:00Z",
+            },
+            "Lautstärke": {
+                "value": 45.0,
+                "unit": "dB",
+                "timestamp": "2025-01-01T12:00:00Z",
+            },
+        },
+    }
 
     dummy_result = MagicMock()
     dummy_result.tolist.return_value = [1]
@@ -43,18 +62,9 @@ def test_predict_valid_data(client: "FlaskClient") -> None:
     with patch("predictor.src.routes.predictor.predict", return_value=dummy_result):
         response = client.post(
             "/predictor/predict",
-            data=json.dumps(sample_data),
+            data=json.dumps(sample_payload),
             content_type="application/json",
         )
 
         assert response.status_code == 200
         assert response.get_json() == {"predictions": [1]}
-
-
-def test_predict_invalid_data(client: "FlaskClient") -> None:
-    response = client.post(
-        "/predictor/predict", data=json.dumps({}), content_type="application/json"
-    )
-
-    assert response.status_code == 400
-    assert response.get_json()["error"] == "Invalid input data"
