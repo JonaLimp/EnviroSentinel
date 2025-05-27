@@ -14,11 +14,11 @@ services:
       - ./model:/app/model
     restart: unless-stopped
 
-  data_ingest:
+  ingestor:
     build:
       context: .
-      dockerfile: data_ingest/Dockerfile
-    container_name: data_ingest_service
+      dockerfile: ingestor/Dockerfile
+    container_name: ingestor_service
     ports:
       - "5001:5000"
     environment:

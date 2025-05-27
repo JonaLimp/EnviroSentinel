@@ -1,5 +1,5 @@
--include data_ingest/.env.development
-data_ingest_PORT := $(PORT)
+-include ingestor/.env.development
+ingestor_PORT := $(PORT)
 
 -include predictor/.env.development
 predictor_PORT := $(PORT)
@@ -11,7 +11,7 @@ requirements:
 
 # Build Docker images
 build-data-ingest:
-	docker build -f data_ingest/Dockerfile -t data_ingest .
+	docker build -f ingestor/Dockerfile -t ingestor .
 
 build-predictor:
 	docker build -f predictor/Dockerfile -t predictor .
@@ -27,13 +27,13 @@ run-predictor:
 	  predictor
 
 run-data-ingest:
-	-@docker rm -f data_ingest_service 2>/dev/null || true
-	docker build -f data_ingest/Dockerfile -t data_ingest .
-	docker run --rm --name data_ingest_service \
-	  --env-file data_ingest/.env.development \
+	-@docker rm -f ingestor_service 2>/dev/null || true
+	docker build -f ingestor/Dockerfile -t ingestor .
+	docker run --rm --name ingestor_service \
+	  --env-file ingestor/.env.development \
 	  -e PYTHONPATH=/app \
-	  -p 5002:$(data_ingest_PORT) \
-	  data_ingest
+	  -p 5002:$(ingestor_PORT) \
+	  ingestor
 
 .PHONY: build up down restart logs shell
 
@@ -57,7 +57,7 @@ logs:
 	docker-compose -f $(COMPOSE_FILE) logs -f
 
 shell-data-ingest:
-	docker exec -it data_ingest_service /bin/sh
+	docker exec -it ingestor_service /bin/sh
 
 shell-predictor:
 	docker exec -it predictor_service /bin/sh

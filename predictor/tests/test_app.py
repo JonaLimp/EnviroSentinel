@@ -21,7 +21,7 @@ class DummyConfig(Config):
     CONFIG_PATH: Path = Path("/tmp/project/config.yml")
 
     # Predictor-specific values (if inherited from DataIngestConfig)
-    DATA_INGEST_URL: str = "http://localhost:5001/fetch"
+    INGESTOR_URL: str = "http://localhost:5001/fetch"
     PREDICTOR_URL: str = "http://localhost:5000/predictor/predict"
     BASE_URL: str = "https://api.opensensemap.org/boxes"
     SENSOR_CONFIG_PATH: Path = Path("/tmp/sensors.yml")

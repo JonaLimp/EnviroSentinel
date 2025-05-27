@@ -34,7 +34,7 @@ GET https://api.opensensemap.org/boxes/{boxId}?phenomenon=temperature
 
 ## Microservices Overview
 
-### `data_ingest` Microservice
+### `Ingestor` Microservice
 Responsible for acquiring real-time data from OpenSenseMap and optionally forwarding it to the predictor.
 
 **Key Components**
@@ -96,7 +96,7 @@ training/
 
 | Microservice   | Method | Endpoint     | Description                                 |
 |----------------|--------|--------------|---------------------------------------------|
-| `data_ingest`  | GET    | `/ingest`    | Fetch from OpenSenseMap & forward to model  |
+| `Ingestor`  | GET    | `/ingest`    | Fetch from OpenSenseMap & forward to model  |
 | `predictor`    | POST   | `/predict`   | Accepts features, returns anomaly result    |
 
 ---
