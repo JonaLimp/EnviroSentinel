@@ -16,7 +16,7 @@ def get_logger(
         return _logger
 
     if config is None:
-        from data_ingest.config import load_config
+        from ingestor.config import load_config
 
         config = load_config()
 
