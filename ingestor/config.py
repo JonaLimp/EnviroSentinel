@@ -30,7 +30,7 @@ class Config:
     # General
     PROJECT_ROOT = ROOT_DIR
     CONFIG_PATH = ENV_FILE
-    PORT = int(os.getenv("PORT", 5001))
+    PORT = int(os.getenv("PORT", 5000))
     DEBUG = os.getenv("DEBUG", "false").lower() == "true"
     TESTING = os.getenv("TESTING", "false").lower() == "true"
     FLASK_ENV = os.getenv("FLASK_ENV", "production")
