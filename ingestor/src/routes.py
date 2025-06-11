@@ -1,4 +1,6 @@
-from flask import current_app, jsonify
+from typing import Literal
+
+from flask import Response, current_app, jsonify
 
 from ingestor.src.blueprint import ingestor_bp
 from ingestor.src.opensense_service import OpenSenseFetcher
@@ -33,3 +35,11 @@ def ingest():
             results.append({"box_id": box_id, "error": str(e)})
 
     return jsonify(results)
+
+
+@ingestor_bp.route("/health", methods=["GET"])
+def health_endpoint() -> tuple[Response, Literal[200]]:
+    """
+    Health check endpoint to verify if the service is running.
+    """
+    return jsonify({"status": "healthy"}), 200
